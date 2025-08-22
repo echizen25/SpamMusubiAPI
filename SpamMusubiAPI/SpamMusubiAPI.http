@@ -1,0 +1,6 @@
+@SpamMusubiAPI_HostAddress = http://localhost:5054
+
+GET {{SpamMusubiAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
