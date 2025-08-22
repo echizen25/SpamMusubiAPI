@@ -6,9 +6,11 @@ using SpamMusubiAPI.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddScoped<IDbConnection>(_ => new SqlConnection(connectionString));
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 // Register repositories
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
